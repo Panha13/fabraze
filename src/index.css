@@ -7,6 +7,6 @@
 
 @layer base {
     body {
-        @apply m-0 p-0 box-border bg-lightest;
+        @apply m-0 p-0 box-border bg-light;
     }
 }

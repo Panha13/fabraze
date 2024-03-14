@@ -4,16 +4,18 @@ import Feature from "./components/Feature";
 import Navbar from "./components/Navbar";
 import Newslatter from "./components/Newslatter";
 import Footer from "./components/Footer";
+import Slideshow from "./components/Slideshow";
 
 const App = () => {
   return (
     <>
       <Announment />
       <Navbar />
-      {/* <Categories />
+      <Slideshow />
+      <Categories />
       <Feature />
       <Newslatter />
-      <Footer /> */}
+      <Footer />
     </>
   );
 };

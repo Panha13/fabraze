@@ -1,5 +1,5 @@
 const Slideshow = () => {
-  return <div>Slideshow</div>;
+  return <div className="w-full h-96">Slideshow</div>;
 };
 
 export default Slideshow;
