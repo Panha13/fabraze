@@ -16,6 +16,7 @@ export default {
         light: "#DADEF2",
         lightest: "#F5F6FA",
         white: "#FFFFFF",
+        red: "#DC143C",
       },
     },
   },
