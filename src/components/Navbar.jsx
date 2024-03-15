@@ -3,6 +3,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { navLinks } from "../constants";
+import Announment from "./Announment";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
@@ -45,48 +46,51 @@ const Navbar = () => {
   }, [menu]);
 
   return (
-    <nav
-      className={`sticky top-0 px-5 lg:px-32 z-50 max-container ${
-        scrolled ? "bg-white/70 backdrop-blur-sm" : "bg-white"
-      }`}
-    >
-      <div className="flex items-center justify-between h-14">
-        <a href="#" className="font-semibold text-3xl sm:text-4xl text-darkest">
-          Fabraze
-        </a>
-        <ul className="flex uppercase text-darkest text-md gap-5 font-medium max-md:hidden">
-          {navLinks.map((item) => (
-            <li key={item.label}>
-              <a href={item.href}>{item.label}</a>
-            </li>
-          ))}
-        </ul>
-        <div className="flex gap-2 sm:gap-3 text-2xl">
-          <a href="#">
-            <BiSearch />
+    <header className="sticky top-0 w-full z-20">
+      <Announment />
+      <nav
+        className={` ${scrolled ? "bg-white/70 backdrop-blur-sm" : "bg-white"}`}
+      >
+        <div className="max-container px-5 lg:px-20 flex justify-between items-center h-14">
+          <a
+            href="#"
+            className="font-semibold text-3xl sm:text-4xl text-darkest"
+          >
+            Fabraze
           </a>
-          <a href="#">
-            <BiHeart />
-          </a>
-          <a href="#" className="max-md:hidden">
-            <BiCartAlt />
-          </a>
-          <a href="#">
-            <BiUser />
-          </a>
-          <button onClick={toggleMenu} className="md:hidden">
-            <AiOutlineMenu />
-          </button>
+          <ul className="hidden md:flex uppercase text-darkest text-md gap-5 font-medium">
+            {navLinks.map((item) => (
+              <li key={item.label}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+          <div className="flex gap-2 sm:gap-3 text-2xl">
+            <a href="#">
+              <BiSearch />
+            </a>
+            <a href="#">
+              <BiHeart />
+            </a>
+            <a href="#" className="hidden md:block">
+              <BiCartAlt />
+            </a>
+            <a href="#">
+              <BiUser />
+            </a>
+            <button onClick={toggleMenu} className="md:hidden">
+              <AiOutlineMenu />
+            </button>
+          </div>
         </div>
-      </div>
-
+      </nav>
       {/* Mobile sidebar */}
       <div
-        className={`fixed top-0 right-0 w-full h-full bg-white/5 backdrop-blur-sm transition-opacity ${
+        className={`fixed top-0 right-0 w-full h-full bg-white/5 backdrop-blur-sm transition-opacity z-50 ${
           menu ? "" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="fixed top-0 right-0 w-64 h-full z-50 bg-white p-5 transform transition-transform duration-300 ease-in-out">
+        <div className="fixed top-0 right-0 w-64 h-full  bg-white p-5 transform transition-transform duration-300 ease-in-out">
           <ul className="flex flex-col gap-3 uppercase text-darkest text-2xl font-medium">
             <button
               className="text-4xl self-end rounded-full transition ease-in-out duration-300 hover:bg-black/15"
@@ -103,7 +107,7 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-    </nav>
+    </header>
   );
 };
 

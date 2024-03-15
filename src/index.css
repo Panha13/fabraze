@@ -10,3 +10,11 @@
         @apply m-0 p-0 box-border bg-lightest;
     }
 }
+
+@layer components {
+    .max-container {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+}
