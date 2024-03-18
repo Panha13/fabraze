@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 import { slideData } from "../constants";
 
@@ -15,7 +15,7 @@ const ArrowButton = ({ direction, onClick, Icon }) => {
 
 const Slideshow = () => {
   const [curr, setCurr] = useState(0);
-  const [autoSlideInterval, setAutoSlideInterval] = useState(null);
+  const autoSlideInterval = useRef(null);
 
   const prev = () =>
     setCurr((curr) => (curr === 0 ? slideData.length - 1 : curr - 1));
@@ -28,25 +28,26 @@ const Slideshow = () => {
 
   // AutoSlide
   useEffect(() => {
-    const interval = setInterval(() => {
+    autoSlideInterval.current = setInterval(() => {
       next();
-    }, 10000);
-
-    setAutoSlideInterval(interval);
+    }, 5000);
 
     return () => {
-      clearInterval(autoSlideInterval);
+      clearInterval(autoSlideInterval.current);
     };
   }, [curr]);
   return (
     <section className="flex items-center overflow-hidden relative">
       <div
-        className={`flex transition-transform ease-out duration-500 translate-x-[-${
-          curr * 100
-        }vw]`}
+        className="flex transition-transform ease-out duration-500 "
+        style={{ transform: `translateX(-${curr * 100}vw)` }}
       >
         {slideData.map((item) => (
-          <div key={item.id} className={`w-screen bg-[${item.bg}]`}>
+          <div
+            key={item.id}
+            style={{ backgroundColor: item.bg }}
+            className="w-screen"
+          >
             <div className="flex flex-col md:flex-row justify-between items-center max-container px-5 lg:px-20 h-[90svh]">
               <div className="inline-block text-center md:text-left w-full mt-12 mb-5">
                 <h3 className="text-md md:text-xl font-medium tracking-widest uppercase">
@@ -78,9 +79,13 @@ const Slideshow = () => {
           {slideData.map((_, index) => (
             <div
               key={index}
-              className={`w-3 h-3  bg-${
-                index === curr ? "dark" : "dark/30"
-              } rounded-full cursor-pointer transition-colors duration-500`}
+              className="w-3 h-3 rounded-full cursor-pointer transition-colors duration-500"
+              style={{
+                backgroundColor:
+                  index === curr
+                    ? "rgba(80, 86, 115, 1)"
+                    : "rgba(80, 86, 115, 0.3)",
+              }}
               onClick={() => goToSlide(index)}
             ></div>
           ))}
@@ -93,25 +98,3 @@ const Slideshow = () => {
 };
 
 export default Slideshow;
-
-// {
-//   /* <div className="w-full h-full flex justify-end">
-//         <img src={slideImg} className="object-cover  h-full" alt="Slideshow" />
-//       </div>
-//       <div className="absolute bottom-0 h-full flex justify-start items-center z-10">
-//         <div className="block">
-//           <h3 className="text-xl font-medium tracking-widest uppercase">
-//             <span># </span>New Arrivals
-//           </h3>
-//           <h1 className="text-6xl font-bold uppercase my-2">Women Fusion</h1>
-//           <hr className="w-1/5 rounded border-2 border-red" />
-//           <p className="text-md text-dark my-2 w-2/3">
-//             Discover a blend of fashion and comfort in our Women's Fusion
-//             collection
-//           </p>
-//           <button className="uppercase p-2 mt-5 text-md bg-darkest text-white ">
-//             Shop Now
-//           </button>
-//         </div>
-//       </div> */
-// }
