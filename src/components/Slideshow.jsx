@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 import { slideData } from "../constants";
-import { Swipeable } from "react-swipeable";
+import { useSwipeable } from "react-swipeable";
 
 const ArrowButton = ({ direction, onClick, Icon }) => {
   return (
@@ -22,13 +22,6 @@ const Slideshow = () => {
     setCurr((curr) => (curr === 0 ? slideData.length - 1 : curr - 1));
   const next = () =>
     setCurr((curr) => (curr === slideData.length - 1 ? 0 : curr + 1));
-  const handleSwipeLeft = () => {
-    next();
-  };
-
-  const handleSwipeRight = () => {
-    prev();
-  };
 
   // AutoSlide
   useEffect(() => {
@@ -42,8 +35,19 @@ const Slideshow = () => {
       clearInterval(autoSlideInterval);
     };
   }, [curr]);
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => next(),
+    onSwipedRight: () => prev(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   return (
-    <section className="flex items-center overflow-hidden relative">
+    <section
+      {...handlers}
+      className="flex items-center overflow-hidden relative"
+    >
       <div
         className={`flex transition-transform ease-out duration-500 translate-x-[-${
           curr * 100
@@ -96,25 +100,3 @@ const Slideshow = () => {
 };
 
 export default Slideshow;
-
-// {
-//   /* <div className="w-full h-full flex justify-end">
-//         <img src={slideImg} className="object-cover  h-full" alt="Slideshow" />
-//       </div>
-//       <div className="absolute bottom-0 h-full flex justify-start items-center z-10">
-//         <div className="block">
-//           <h3 className="text-xl font-medium tracking-widest uppercase">
-//             <span># </span>New Arrivals
-//           </h3>
-//           <h1 className="text-6xl font-bold uppercase my-2">Women Fusion</h1>
-//           <hr className="w-1/5 rounded border-2 border-red" />
-//           <p className="text-md text-dark my-2 w-2/3">
-//             Discover a blend of fashion and comfort in our Women's Fusion
-//             collection
-//           </p>
-//           <button className="uppercase p-2 mt-5 text-md bg-darkest text-white ">
-//             Shop Now
-//           </button>
-//         </div>
-//       </div> */
-// }
