@@ -5,7 +5,7 @@ import { slideData } from "../constants";
 const ArrowButton = ({ direction, onClick, Icon }) => {
   return (
     <button
-      className={`absolute ${direction}-0 transition-all ease-in-out duration-300 hover:bg-white rounded-full p-2 mx-4 text-2xl`}
+      className={`absolute ${direction}-0 transition-all ease-in-out duration-300 hover:bg-white max-md:hidden rounded-full p-2 mx-4 text-2xl`}
       onClick={onClick}
     >
       <Icon className="text-dark/30" />
@@ -21,6 +21,10 @@ const Slideshow = () => {
     setCurr((curr) => (curr === 0 ? slideData.length - 1 : curr - 1));
   const next = () =>
     setCurr((curr) => (curr === slideData.length - 1 ? 0 : curr + 1));
+
+  const goToSlide = (index) => {
+    setCurr(index);
+  };
 
   // AutoSlide
   useEffect(() => {
@@ -43,7 +47,7 @@ const Slideshow = () => {
       >
         {slideData.map((item) => (
           <div key={item.id} className={`w-screen bg-[${item.bg}]`}>
-            <div className="flex flex-col md:flex-row justify-between items-center max-container px-5 lg:px-20 h-svh">
+            <div className="flex flex-col md:flex-row justify-between items-center max-container px-5 lg:px-20 h-[90svh]">
               <div className="inline-block text-center md:text-left w-full mt-12 mb-5">
                 <h3 className="text-md md:text-xl font-medium tracking-widest uppercase">
                   <span># </span>
@@ -77,6 +81,7 @@ const Slideshow = () => {
               className={`w-3 h-3  bg-${
                 index === curr ? "dark" : "dark/30"
               } rounded-full cursor-pointer transition-colors duration-500`}
+              onClick={() => goToSlide(index)}
             ></div>
           ))}
         </div>
