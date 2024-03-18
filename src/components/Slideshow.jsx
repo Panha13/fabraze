@@ -36,6 +36,7 @@ const Slideshow = () => {
       clearInterval(autoSlideInterval.current);
     };
   }, [curr]);
+
   return (
     <section className="flex items-center overflow-hidden relative">
       <div
@@ -98,3 +99,4 @@ const Slideshow = () => {
 };
 
 export default Slideshow;
+// vr;
