@@ -77,6 +77,7 @@ const Slideshow = () => {
       </div>
       <div className="absolute bottom-8 right-0 left-0">
         <div className="flex justify-center items-center gap-1">
+          hi
           {slideData.map((_, index) => (
             <div
               key={index}
