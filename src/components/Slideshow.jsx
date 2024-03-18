@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 import { slideData } from "../constants";
 
 const ArrowButton = ({ direction, onClick, Icon }) => {
   return (
     <button
-      className={`absolute ${direction}-0 transition-all ease-in-out duration-300 hover:bg-white rounded-full p-2 mx-4 text-2xl`}
+      className={`absolute ${direction}-0 transition-all ease-in-out duration-300 hover:bg-white max-md:hidden rounded-full p-2 mx-4 text-2xl`}
       onClick={onClick}
     >
       <Icon className="text-dark/30" />
@@ -15,36 +15,41 @@ const ArrowButton = ({ direction, onClick, Icon }) => {
 
 const Slideshow = () => {
   const [curr, setCurr] = useState(0);
-  const [autoSlideInterval, setAutoSlideInterval] = useState(null);
+  const autoSlideInterval = useRef(null);
 
   const prev = () =>
     setCurr((curr) => (curr === 0 ? slideData.length - 1 : curr - 1));
   const next = () =>
     setCurr((curr) => (curr === slideData.length - 1 ? 0 : curr + 1));
 
+  const goToSlide = (index) => {
+    setCurr(index);
+  };
+
   // AutoSlide
   useEffect(() => {
-    const interval = setInterval(() => {
+    autoSlideInterval.current = setInterval(() => {
       next();
-    }, 10000);
-
-    setAutoSlideInterval(interval);
+    }, 5000);
 
     return () => {
-      clearInterval(autoSlideInterval);
+      clearInterval(autoSlideInterval.current);
     };
   }, [curr]);
 
   return (
     <section className="flex items-center overflow-hidden relative">
       <div
-        className={`flex transition-transform ease-out duration-500 translate-x-[-${
-          curr * 100
-        }vw]`}
+        className="flex transition-transform ease-out duration-500 "
+        style={{ transform: `translateX(-${curr * 100}vw)` }}
       >
         {slideData.map((item) => (
-          <div key={item.id} className={`w-screen bg-[${item.bg}]`}>
-            <div className="flex flex-col md:flex-row justify-between items-center max-container px-5 lg:px-20 h-svh">
+          <div
+            key={item.id}
+            style={{ backgroundColor: item.bg }}
+            className="w-screen"
+          >
+            <div className="flex flex-col md:flex-row justify-between items-center max-container px-5 lg:px-20 h-[90svh]">
               <div className="inline-block text-center md:text-left w-full mt-12 mb-5">
                 <h3 className="text-md md:text-xl font-medium tracking-widest uppercase">
                   <span># </span>
@@ -75,9 +80,14 @@ const Slideshow = () => {
           {slideData.map((_, index) => (
             <div
               key={index}
-              className={`w-3 h-3  bg-${
-                index === curr ? "dark" : "dark/30"
-              } rounded-full cursor-pointer transition-colors duration-500`}
+              className="w-3 h-3 rounded-full cursor-pointer transition-colors duration-500"
+              style={{
+                backgroundColor:
+                  index === curr
+                    ? "rgba(80, 86, 115, 1)"
+                    : "rgba(80, 86, 115, 0.3)",
+              }}
+              onClick={() => goToSlide(index)}
             ></div>
           ))}
         </div>
