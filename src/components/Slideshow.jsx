@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 import { slideData } from "../constants";
-import { useSwipeable } from "react-swipeable";
 
 const ArrowButton = ({ direction, onClick, Icon }) => {
   return (
@@ -36,18 +35,8 @@ const Slideshow = () => {
     };
   }, [curr]);
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => next(),
-    onSwipedRight: () => prev(),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true,
-  });
-
   return (
-    <section
-      {...handlers}
-      className="flex items-center overflow-hidden relative"
-    >
+    <section className="flex items-center overflow-hidden relative">
       <div
         className={`flex transition-transform ease-out duration-500 translate-x-[-${
           curr * 100
