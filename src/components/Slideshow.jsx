@@ -30,7 +30,7 @@ const Slideshow = () => {
   useEffect(() => {
     autoSlideInterval.current = setInterval(() => {
       next();
-    }, 5000);
+    }, 4500);
 
     return () => {
       clearInterval(autoSlideInterval.current);
