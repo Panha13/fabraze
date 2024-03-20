@@ -4,7 +4,7 @@ import img3 from "../assets/image3.png";
 
 const Category = ({ image, label, link }) => {
   return (
-    <figure className="relative w-full h-64 rounded-md overflow-hidden cursor-pointer">
+    <figure className="relative w-full h-40 lg:h-64 rounded-md overflow-hidden cursor-pointer">
       <a href={link}>
         <img
           className=" w-full h-full object-cover object-center transform transition-transform duration-500 hover:scale-105"
@@ -26,7 +26,7 @@ const Categories = () => {
     { image: img3, label: "Kids", link: "#kids" },
   ];
   return (
-    <section className="flex flex-row gap-3 m-5">
+    <section className="flex max-sm:flex-col flex-row gap-3 m-5">
       {categories.map((category, index) => (
         <Category
           key={index}
