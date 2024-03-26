@@ -47,7 +47,6 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 w-full z-20">
-      <Announment />
       <nav
         className={` ${scrolled ? "bg-white/70 backdrop-blur-sm" : "bg-white"}`}
       >

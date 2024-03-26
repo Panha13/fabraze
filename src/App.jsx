@@ -9,6 +9,7 @@ import Slideshow from "./components/Slideshow";
 const App = () => {
   return (
     <>
+      <Announment />
       <Navbar />
       <Slideshow />
       <Categories />
