@@ -1,6 +1,6 @@
 import { useState } from "react";
-// import fProduct from "../assets/pfeature1.png";
 import { featureProduct as fproducts } from "../constants/index";
+import { SlArrowDown } from "react-icons/sl";
 
 const navItems = ["Best Seller", "New Arrrivals", "Sale Product"];
 const NavItems = ({ label, isActive, onClick }) => {
@@ -16,22 +16,20 @@ const NavItems = ({ label, isActive, onClick }) => {
 
 const Feature = () => {
   const [activeItem, setActiveItem] = useState(0);
+  const [products, setProducts] = useState(fproducts);
 
-  // handle click to change color of product
   const handleColorClick = (id, color) => {
     const updatedItems = [...products];
     const index = updatedItems.findIndex((p) => p.index === id);
-    // console.log(index, color);
     if (index !== -1) {
       updatedItems[index] = { ...updatedItems[index], currentIndex: color };
-
       setProducts(updatedItems);
     }
   };
-  const [products, setProducts] = useState(fproducts);
 
   return (
     <main className="max-container px-5 lg:px-20">
+      {/* NavItems */}
       <section className="mt-12 flex justify-center max-sm:justify-start items-center">
         <ul className="relative h-10 flex justify-center item-center gap-4 max-sm:gap-3 text-center md:text-lg font-medium text-dark">
           {navItems.map((item, index) => (
@@ -45,11 +43,14 @@ const Feature = () => {
           <div className="absolute bottom-0 inset-x-0 border-b-[3px] border-light  z-0"></div>
         </ul>
       </section>
-      <section className="mt-10">
+
+      {/* Product section */}
+      <section className="my-10">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-sm:gap-2">
           {products.map((item) => (
             <article key={item.index} className="relative ">
               <figure className="w-full aspect-[9/14] overflow-hidden relative hover:cursor-pointer">
+                {/* Product images */}
                 <div className="h-full relative group">
                   <img
                     src={item.variants[item.currentIndex].images[0]}
@@ -62,6 +63,8 @@ const Feature = () => {
                     className="absolute object-cover w-full h-full opacity-0 z-10 transition-opacity duration-300 group-hover:opacity-100"
                   />
                 </div>
+
+                {/* Product tag */}
                 {item.tag && (
                   <div
                     className={`px-3 absolute z-[15] top-5 flex justify-center items-center ${
@@ -79,31 +82,38 @@ const Feature = () => {
                 )}
               </figure>
 
+              {/* Product details */}
               <div className="py-2 px-1 font-medium text-md">
                 <h3 className="text-darkest ">{item.pname}</h3>
                 <div className="flex flex-wrap gap-x-3 ">
                   {item.discount ? (
                     <>
-                      <p className="text-black font-semibold">
+                      {/* Discounted price */}
+                      <p className="text-dark font-semibold">
                         $
                         {(
                           item.price -
                           (item.price * item.discount) / 100
                         ).toFixed(2)}
                       </p>
+                      {/* Original price */}
                       <p className="line-through text-dark">
                         ${item.price.toFixed(2)}
                       </p>
+                      {/* Discount percentage */}
                       <p className="text-red font-semibold">
                         {item.discount}% off
                       </p>
                     </>
                   ) : (
-                    <p className="text-darkest font-semibold">
+                    // Regular price
+                    <p className="text-dark font-semibold">
                       ${item.price.toFixed(2)}
                     </p>
                   )}
                 </div>
+
+                {/* Color variants */}
                 <ul className="flex gap-2 my-2">
                   {item.variants.map((variant, index) => (
                     <li
@@ -126,6 +136,14 @@ const Feature = () => {
             </article>
           ))}
         </div>
+      </section>
+
+      {/* Load more button */}
+      <section className="flex justify-center items-center">
+        <button className="flex flex-col items-center">
+          <p className="text-dark text-md">Load more</p>
+          <SlArrowDown className="animate-bounce text-lg text-dark" />
+        </button>
       </section>
     </main>
   );
