@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { featureProduct as fproducts } from "../constants/index";
-import { SlArrowDown } from "react-icons/sl";
+// import { SlArrowDown } from "react-icons/sl";
+import Loadmore from "../assets/load_more.svg";
 
 const navItems = ["Best Seller", "New Arrrivals", "Sale Product"];
 const NavItems = ({ label, isActive, onClick }) => {
@@ -142,7 +143,7 @@ const Feature = () => {
       <section className="flex justify-center items-center">
         <button className="flex flex-col items-center">
           <p className="text-dark text-md">Load more</p>
-          <SlArrowDown className="animate-bounce text-lg text-dark" />
+          <img src={Loadmore} className="animate-bounce size-6 text-dark" />
         </button>
       </section>
     </main>
