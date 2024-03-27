@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
+import { ReusableButton } from "./ReusableButton";
 import { slideData } from "../constants";
 
 const ArrowButton = ({ direction, onClick, Icon }) => {
@@ -62,9 +63,7 @@ const Slideshow = () => {
                   <hr className="w-32 rounded border-2 border-red" />
                 </div>
                 <p className="text-sm text-dark my-4 md:w-2/3">{item.desc}</p>
-                <button className="uppercase py-2 px-4 mt-5 text-md bg-darkest text-white">
-                  Shop Now
-                </button>
+                <ReusableButton className="mt-5">Shop Now</ReusableButton>
               </div>
               <img
                 src={item.image}
