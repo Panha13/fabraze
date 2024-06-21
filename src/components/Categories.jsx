@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import img1 from "../assets/image1.png";
 import img2 from "../assets/image2.png";
 import img3 from "../assets/image3.png";
@@ -37,6 +38,12 @@ const Categories = () => {
       ))}
     </section>
   );
+};
+
+Category.propTypes = {
+  image: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
 };
 
 export default Categories;

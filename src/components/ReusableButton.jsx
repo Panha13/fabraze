@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ReusableButton = ({ className, onClick, children }) => (
   <button
@@ -8,5 +9,9 @@ const ReusableButton = ({ className, onClick, children }) => (
     {children}
   </button>
 );
-
+ReusableButton.propTypes = {
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.string,
+}; // Add propType
 export { ReusableButton };

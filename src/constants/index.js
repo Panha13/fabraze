@@ -104,7 +104,6 @@ export const featureProduct = [
           "https://i.ibb.co/kctXQ73/8626-N-90-X-010-1-780589-4.jpg",
         ],
       },
-      ,
     ],
     tag: "new",
   },

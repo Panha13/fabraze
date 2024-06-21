@@ -3,7 +3,6 @@ import { IoCloseOutline } from "react-icons/io5";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { navLinks } from "../constants";
-import Announment from "./Announment";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);

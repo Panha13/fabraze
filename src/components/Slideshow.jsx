@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 import { ReusableButton } from "./ReusableButton";
 import { slideData } from "../constants";
@@ -95,6 +96,12 @@ const Slideshow = () => {
       <ArrowButton direction="right" onClick={next} Icon={GoArrowRight} />
     </section>
   );
+};
+
+ArrowButton.propTypes = {
+  direction: PropTypes.string,
+  onClick: PropTypes.func,
+  Icon: PropTypes.elementType,
 };
 
 export default Slideshow;
