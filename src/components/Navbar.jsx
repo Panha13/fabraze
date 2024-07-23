@@ -3,6 +3,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { navLinks } from "../constants";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
@@ -56,10 +57,15 @@ const Navbar = () => {
           >
             Fabraze
           </a>
-          <ul className="hidden md:flex uppercase text-darkest text-md gap-5 font-medium">
+          <ul className="hidden md:flex uppercase text-darkest text-md gap-5 font-medium ">
             {navLinks.map((item) => (
               <li key={item.label}>
-                <a href={item.href}>{item.label}</a>
+                <Link
+                  to={item.href}
+                  className="py-2 border-b-2 border-transparent hover:border-red transition-all duration-300 ease-in-out "
+                >
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -99,7 +105,7 @@ const Navbar = () => {
 
             {navLinks.map((item) => (
               <li key={item.label} className="">
-                <a href={item.href}>{item.label}</a>
+                <Link to={item.href}>{item.label}</Link>
               </li>
             ))}
           </ul>

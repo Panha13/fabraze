@@ -1,22 +1,25 @@
-import Announment from "./components/Announment";
-import Categories from "./components/Categories";
-import Feature from "./components/Feature";
-import Navbar from "./components/Navbar";
-import Newslatter from "./components/Newslatter";
-import Footer from "./components/Footer";
-import Slideshow from "./components/Slideshow";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MasterLayout from "./layouts/MasterLayout";
+import Home from "./pages/Home";
+import Women from "./pages/Women";
+import Men from "./pages/Men";
+import Boys from "./pages/Boys";
+import Girls from "./pages/Girls";
 
 const App = () => {
   return (
-    <>
-      <Announment />
-      <Navbar />
-      <Slideshow />
-      <Categories />
-      <Feature />
-      <Newslatter />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MasterLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/women" element={<Women />} />
+          <Route path="/men" element={<Men />} />
+          <Route path="/boys" element={<Boys />} />
+          <Route path="/girls" element={<Girls />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
